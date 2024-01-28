@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import { PrismaClient } from "@prisma/client";
+import {PrismaClient} from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import  * as jwt from "jsonwebtoken";
 
@@ -32,6 +32,8 @@ export async function login(req: Request, res: Response){
         }
 
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: "1h"});
+
+        console.log(token);
 
         return res.status(200).json({message: "Login successful", token: token});
     
